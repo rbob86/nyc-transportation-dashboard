@@ -1,0 +1,21 @@
+.stations-map__popup {
+    h2 {
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    li {
+        font-size: 0.9375rem;
+
+        &:not(:last-child) {
+            margin-bottom: 12px;
+        }
+
+        strong {
+            display: block;
+            font-size: 0.75rem;
+            color: #a6a4a4;
+        }
+    }
+}

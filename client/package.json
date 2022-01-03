@@ -1,0 +1,60 @@
+{
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@looker/embed-sdk": "^1.6.1",
+        "@looker/sdk": "^21.20.0",
+        "@looker/sdk-rtl": "^21.2.0",
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
+        "@testing-library/user-event": "^12.1.10",
+        "@types/google-map-react": "^2.1.3",
+        "@types/jest": "^26.0.15",
+        "@types/node": "^12.0.0",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "axios": "^0.24.0",
+        "google-map-react": "^2.1.10",
+        "leaflet": "^1.7.1",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-leaflet": "^3.2.2",
+        "react-router-dom": "^6.0.2",
+        "react-scripts": "4.0.3",
+        "typescript": "^4.1.2",
+        "web-vitals": "^1.0.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint": "eslint src/**/*.ts src/**/*.tsx"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+    ],
+    "devDependencies": {
+        "@types/leaflet": "^1.7.7",
+        "@typescript-eslint/parser": "^4.33.0",
+        "dotenv": "^10.0.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "prettier": "^2.5.0",
+        "sass": "^1.44.0",
+        "tslint": "^5.20.1",
+        "tslint-config-prettier": "^1.18.0",
+        "tslint-consistent-codestyle": "^1.16.0",
+        "tslint-plugin-prettier": "^2.3.0"
+    }
+}

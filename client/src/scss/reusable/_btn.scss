@@ -1,0 +1,19 @@
+.btn {
+    display: block;
+    padding: 14px 18px;
+    background-color: #e6e6e6;
+    font-size: 0.75rem;
+    color: darken($color-grey, 20%);
+    text-transform: uppercase;
+    font-weight: bold;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+
+    &.active,
+    &:hover,
+    &:active {
+        background-color: $color-blue;
+        color: #fff;
+    }
+}

@@ -1,0 +1,33 @@
+.tabs ul {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.tabs a {
+    display: block;
+    padding: 14px 18px;
+    background-color: #e6e6e6;
+    font-size: 0.75rem;
+    color: darken($color-grey, 20%);
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &.active,
+    &:hover,
+    &:active {
+        background-color: $color-blue;
+        color: #fff;
+    }
+}
+
+.tabs li:first-child a {
+    border-radius: 3px 0 0 3px;
+}
+
+.tabs li:last-child a {
+    border-radius: 0 3px 3px 0;
+}
+
+.tabs li:not(:last-child) a {
+    border-right: 2px solid #fff;
+}

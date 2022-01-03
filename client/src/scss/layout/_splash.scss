@@ -1,0 +1,114 @@
+.splash {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('/assets/images/splash-bg.jpg') no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.splash__content {
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+}
+
+.splash__heading {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1.125;
+
+    > a {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 15px;
+        border-radius: 3px;
+        font-style: italic;
+        color: #fff;
+        background-color: $color-blue;
+        padding: 5px 5px 5px 15px;
+        font-family: Georgia;
+        font-size: 1.75rem;
+
+        span {
+            font-size: 2rem;
+            vertical-align: middle;
+        }
+
+        &:hover {
+            background-color: darken($color-blue, 5%);
+        }
+    }
+}
+
+.splash__counters {
+    display: flex;
+    margin-bottom: 30px;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-name: slide;
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-300px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.splash__counter {
+    width: 220px;
+    padding: 20px;
+    background-color: rgba(24, 24, 24, 0.8);
+    text-align: center;
+    color: #fff;
+    border-radius: $border-radius;
+
+    h2 {
+        font-size: 0.875rem;
+        margin: 10px 0 15px 0;
+        font-family: $font-secondary;
+    }
+
+    img {
+        width: 40px;
+    }
+
+    span {
+        font-size: 2rem;
+    }
+
+    &:not(:last-child) {
+        margin-right: 20px;
+    }
+}
+
+.splash__disclaimer {
+    position: absolute;
+    bottom: 25px;
+    right: 0;
+    padding: 10px 25px 10px 15px;
+    background-color: rgba(24, 24, 24, 0.8);
+    border-radius: $border-radius 0 0 $border-radius;
+
+    p {
+        font-weight: bold;
+        font-size: 0.75rem;
+        color: #fff;
+        text-align: right;
+
+        &:not(:last-child) {
+            margin-bottom: 8px;
+        }
+    }
+}
+
+.splash__nav {
+    position: absolute;
+    top: 50%;
+    right: 0;
+}

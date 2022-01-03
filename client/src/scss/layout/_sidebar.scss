@@ -1,0 +1,64 @@
+.sidebar {
+    width: 120px;
+    height: 100vh;
+    padding: 20px;
+    background-color: #fff;
+    border-right: 1px solid #ecf0f8;
+}
+
+.sidebar__heading {
+    display: block;
+    margin: 0 auto 60px auto;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.25rem;
+
+    a {
+        color: $color-orange;
+    }
+
+    span {
+        display: block;
+        font-size: 2.75rem;
+    }
+}
+
+.sidebar__nav-link {
+    display: flex;
+    margin: 0 auto 45px auto;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1rem;
+    text-align: center;
+    color: lighten(#8c8b8b, 10%);
+
+    span {
+        color: $color-grey;
+        // color: #8c8b8b;
+    }
+
+    span {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+.sidebar__nav-link.active span,
+.sidebar__nav-link:hover span,
+.sidebar__nav-link:active span {
+    color: $color-orange;
+}
+
+// .sidebar__nav-link--citibike.active,
+// .sidebar__nav-link--citibike.active span {
+//     color: #181818;
+// }
+
+// .sidebar__nav-link--taxi.active,
+// .sidebar__nav-link--taxi.active span {
+//     color: $color-yellow;
+// }

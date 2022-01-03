@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["esnext"],
+        "allowJs": false,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "outDir": "dist"
+    },
+    "include": ["src"]
+}
