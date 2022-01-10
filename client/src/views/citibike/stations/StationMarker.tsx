@@ -29,7 +29,7 @@ function StationMarker({ station }: Props): JSX.Element {
                     </li>
                     <li>
                         <strong>Total Trips Taken</strong>
-                        {station.totalTrips}
+                        {station.totalTrips.toLocaleString('en-US')}
                     </li>
                     <li>
                         <strong>Total Trip Duration</strong>

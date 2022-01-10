@@ -18,8 +18,8 @@ function Dashboard(): JSX.Element {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/citibike/heatmap">
-                                Heatmap
+                            <NavLink to="/dashboard/citibike/timelapse">
+                                Timelapse
                             </NavLink>
                         </li>
                     </ul>

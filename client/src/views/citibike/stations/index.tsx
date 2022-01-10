@@ -9,50 +9,54 @@ import {
 } from 'leaflet'
 import { CitibikeStation, StationStats } from '../../../types/citibike'
 import NeighborhoodGeoJSON from './NeighborhoodGeoJSON'
-import StationFeatureGroups from './StationFeatureGroups'
 import StatsPanel from './StatsPanel'
 import FilterPanel from './FilterPanel'
+import StationFeatureGroups from './StationFeatureGroups'
+import Spinner from '../../../components/Spinner'
+
+const getStationStats = (stations: CitibikeStation[]): StationStats => {
+    let [totalTrips, totalTripDurationInDays, averageTripDurationInMinutes] = [
+        0, 0, 0,
+    ]
+    for (const station of stations) {
+        totalTrips += station.totalTrips
+        totalTripDurationInDays += station.totalTripDurationInDays
+        averageTripDurationInMinutes += station.averageTripDurationInMinutes
+    }
+    averageTripDurationInMinutes =
+        averageTripDurationInMinutes / stations.length || 0
+    return {
+        totalTrips,
+        totalTripDurationInDays,
+        averageTripDurationInMinutes,
+    }
+}
 
 function Stations(): JSX.Element {
     const mapRef = useRef<Map>()
     const allStations = useRef<CitibikeStation[]>([])
     const neighborhoods = useRef<{ [index: string]: CitibikeStation[] }>({})
     const neighborhoodNames = useRef<string[]>([])
-    const featureGroupRefs: {
+    const featureGroupRefs = useRef<{
         [index: string]: LFeatureGroup<LCircleMarker>
-    } = {}
+    }>({})
 
     const [neighborhoodGeoJson, setNeighborhoodGeoJson] =
         useState<GeoJsonObject | null>(null)
-    const [selectedNeighborhood, setSelectedNeighborhood] = useState<string>('')
+    const [selectedNeighborhood, setSelectedNeighborhood] = useState('')
     const [stationStats, setStationStats] = useState<StationStats>({
         totalTrips: 0,
         totalTripDurationInDays: 0,
         averageTripDurationInMinutes: 0,
     })
+    const [isLoadingMap, setIsLoadingMap] = useState(true)
 
-    const calculateStationStats = useCallback(() => {
+    const getStationStatsCallback = useCallback(() => {
         const stations =
             selectedNeighborhood === ''
                 ? allStations.current
                 : neighborhoods.current[selectedNeighborhood]
-        let [
-            totalTrips,
-            totalTripDurationInDays,
-            averageTripDurationInMinutes,
-        ] = [0, 0, 0]
-        for (const station of stations) {
-            totalTrips += station.totalTrips
-            totalTripDurationInDays += station.totalTripDurationInDays
-            averageTripDurationInMinutes += station.averageTripDurationInMinutes
-        }
-        averageTripDurationInMinutes =
-            averageTripDurationInMinutes / stations.length || 0
-        setStationStats({
-            totalTrips,
-            totalTripDurationInDays,
-            averageTripDurationInMinutes,
-        })
+        setStationStats(getStationStats(stations))
     }, [selectedNeighborhood])
 
     useEffect(() => {
@@ -62,6 +66,7 @@ function Stations(): JSX.Element {
             )
 
             allStations.current = response.data.stations
+            setStationStats(getStationStats(allStations.current))
             for (const station of allStations.current) {
                 neighborhoods.current[station.neighborhood] =
                     neighborhoods.current[station.neighborhood] || []
@@ -72,27 +77,33 @@ function Stations(): JSX.Element {
             ).sort()
 
             setNeighborhoodGeoJson(response.data.neighborhoodGeoJson)
+            setIsLoadingMap(false)
         }
 
         getMapData()
     }, [])
 
     useEffect(() => {
-        calculateStationStats()
-    }, [calculateStationStats])
+        getStationStatsCallback()
+    }, [getStationStatsCallback])
 
     useEffect(() => {
-        console.log(selectedNeighborhood)
-        console.log(featureGroupRefs)
-        console.log(featureGroupRefs[selectedNeighborhood])
-        for (const neighborhood in featureGroupRefs) {
-            featureGroupRefs[neighborhood].remove()
-        }
-        if (selectedNeighborhood in featureGroupRefs) {
-            featureGroupRefs[selectedNeighborhood].addTo(mapRef.current!)
-        } else {
-            for (const neighborhood in featureGroupRefs) {
-                featureGroupRefs[neighborhood].addTo(mapRef.current!)
+        const map = mapRef.current
+        if (map) {
+            const refs = featureGroupRefs.current
+            // Might be unncessary for else statement
+            for (const neighborhood in refs) {
+                refs[neighborhood].remove()
+            }
+            if (selectedNeighborhood in refs) {
+                const featureGroup = refs[selectedNeighborhood]
+                featureGroup.addTo(map)
+                map.panTo(featureGroup.getBounds().getCenter())
+            } else {
+                for (const neighborhood in refs) {
+                    refs[neighborhood].addTo(map)
+                }
+                map.panTo([40.751873, -73.977706])
             }
         }
     }, [selectedNeighborhood, featureGroupRefs])
@@ -106,61 +117,72 @@ function Stations(): JSX.Element {
         []
     )
 
-    const addFeatureGroupRef = useCallback(
-        (neighborhood: string, ref: any): void => {
-            if (ref) {
-                featureGroupRefs[neighborhood] = ref
-            }
+    const setFeatureGroupRef = useCallback(
+        (ref: LFeatureGroup<LCircleMarker>, neighborhood: string) => {
+            featureGroupRefs.current[neighborhood] = ref
         },
-        [featureGroupRefs]
+        []
     )
 
     return (
         <div className="module module--two-col">
-            <div className="module__content">
-                <MapContainer
-                    center={[40.751873, -73.977706]}
-                    zoom={12}
-                    scrollWheelZoom={false}
-                    style={{ width: '100%', height: '100%' }}
-                    whenCreated={(mapInstance) => {
-                        mapRef.current = mapInstance
-                    }}
-                >
-                    <TileLayer
-                        attribution="Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ"
-                        url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-                        maxZoom={16}
-                    />
-                    {neighborhoodGeoJson &&
-                        neighborhoodNames.current.length && (
-                            <NeighborhoodGeoJSON
-                                geojson={neighborhoodGeoJson}
-                                handleClick={handleNeighborhoodClicked}
+            {isLoadingMap && <Spinner />}
+            {!isLoadingMap && (
+                <>
+                    <div className="module__content">
+                        <MapContainer
+                            center={[40.751873, -73.977706]}
+                            zoom={12}
+                            scrollWheelZoom={false}
+                            style={{ width: '100%', height: '100%' }}
+                            whenCreated={(mapInstance) => {
+                                mapRef.current = mapInstance
+                            }}
+                        >
+                            <TileLayer
+                                attribution="Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ"
+                                url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+                                maxZoom={16}
                             />
-                        )}
-                    {Object.keys(neighborhoods.current).map((neighborhood) => (
-                        <StationFeatureGroups
-                            key={neighborhood}
-                            innerRef={addFeatureGroupRef}
-                            neighborhood={neighborhood}
-                            stations={neighborhoods.current[neighborhood]}
-                        />
-                    ))}
-                </MapContainer>
-            </div>
+                            {neighborhoodGeoJson &&
+                                neighborhoodNames.current.length && (
+                                    <NeighborhoodGeoJSON
+                                        geojson={neighborhoodGeoJson}
+                                        handleClick={handleNeighborhoodClicked}
+                                    />
+                                )}
+                            {Object.keys(neighborhoods.current).map(
+                                (neighborhood) => {
+                                    return (
+                                        <StationFeatureGroups
+                                            key={neighborhood}
+                                            stations={
+                                                neighborhoods.current[
+                                                    neighborhood
+                                                ]
+                                            }
+                                            neighborhood={neighborhood}
+                                            setRef={setFeatureGroupRef}
+                                        />
+                                    )
+                                }
+                            )}
+                        </MapContainer>
+                    </div>
 
-            <section className="module__info-panel-container">
-                <FilterPanel
-                    neighborhoods={neighborhoodNames.current}
-                    selectedNeighborhood={selectedNeighborhood}
-                    selectNeighborhood={(neighborhood) => {
-                        setSelectedNeighborhood(neighborhood)
-                    }}
-                    resetFilters={() => setSelectedNeighborhood('')}
-                />
-                <StatsPanel stats={stationStats} />
-            </section>
+                    <section className="module__info-panel-container">
+                        <FilterPanel
+                            neighborhoods={neighborhoodNames.current}
+                            selectedNeighborhood={selectedNeighborhood}
+                            selectNeighborhood={(neighborhood) => {
+                                setSelectedNeighborhood(neighborhood)
+                            }}
+                            resetFilters={() => setSelectedNeighborhood('')}
+                        />
+                        <StatsPanel stats={stationStats} />
+                    </section>
+                </>
+            )}
         </div>
     )
 }

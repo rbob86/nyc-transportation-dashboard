@@ -1,27 +1,31 @@
 import { FeatureGroup } from 'react-leaflet'
-
+import {
+    FeatureGroup as LFeatureGroup,
+    CircleMarker as LCircleMarker,
+} from 'leaflet'
 import { CitibikeStation } from '../../../types/citibike'
 import StationMarker from './StationMarker'
 import { memo } from 'react'
 
 type Props = {
-    neighborhood: string
-    innerRef: any
     stations: CitibikeStation[]
+    neighborhood: string
+    setRef: (ref: LFeatureGroup<LCircleMarker>, neighborhood: string) => void
 }
 
 function StationFeatureGroups({
-    neighborhood,
-    innerRef,
     stations,
+    neighborhood,
+    setRef,
 }: Props): JSX.Element {
-    // const refs: {
-    //     [index: string]: LFeatureGroup<LCircleMarker>
-    // } = {}
-    console.log('hello')
-
     return (
-        <FeatureGroup ref={innerRef}>
+        <FeatureGroup
+            ref={(ref) => {
+                if (ref) {
+                    setRef(ref, neighborhood)
+                }
+            }}
+        >
             {stations.map((station, i) => (
                 <StationMarker station={station} key={i} />
             ))}

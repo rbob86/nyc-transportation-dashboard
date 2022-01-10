@@ -4,10 +4,6 @@
 
 .module--two-col {
     display: flex;
-
-    > div:last-child {
-        margin-left: 15px;
-    }
 }
 
 .module__content,
@@ -20,6 +16,10 @@
 .module__content {
     width: 100%;
     height: 100%;
+}
+
+.module__info-panel-container {
+    margin-left: 15px;
 }
 
 .module__info-panel {

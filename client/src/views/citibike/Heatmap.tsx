@@ -1,5 +1,5 @@
-function Heatmap(): JSX.Element {
+function Timelapse(): JSX.Element {
     return <div className="module"></div>
 }
 
-export default Heatmap
+export default Timelapse

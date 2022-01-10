@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
-import { LookerEmbedDashboard, LookerEmbedSDK } from '@looker/embed-sdk'
+import {
+    // DashboardEvent,
+    LookerEmbedDashboard,
+    LookerEmbedSDK,
+} from '@looker/embed-sdk'
 import Spinner from '../../components/Spinner'
 
 LookerEmbedSDK.init(
@@ -24,6 +28,9 @@ function Metrics(): JSX.Element {
                 'Date Sent to Company Date': '2020',
             })
             .appendTo('#embed-dashboard')
+            // .on('dashboard:filters:changed', (event: DashboardEvent) =>
+            //     formatFilterString(event)
+            // )
             .build()
             .connect()
             .then((dashboard) => {

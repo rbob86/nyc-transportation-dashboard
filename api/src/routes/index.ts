@@ -3,4 +3,4 @@ import citibike from './citibike'
 import dashboard from './dashboard'
 import taxi from './taxi'
 
-export default [auth, citibike, taxi]
+export default [auth, citibike, dashboard, taxi]
