@@ -51,6 +51,8 @@ router.get(
             res.status(500)
             res.send(e.message)
         }
+
+        
     }
 )
 

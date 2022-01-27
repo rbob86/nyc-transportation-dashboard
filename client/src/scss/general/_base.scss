@@ -32,6 +32,15 @@ form {
     margin-top: 15px;
 }
 
+.form-group:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.form-group button {
+    display: inline-block;
+    margin-right: 8px;
+}
+
 input,
 select {
     width: 100%;

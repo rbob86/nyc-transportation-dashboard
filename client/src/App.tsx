@@ -5,7 +5,7 @@ import DashboardWrapper from './views/DashboardWrapper'
 import CitibikeDashboard from './views/citibike/Dashboard'
 import CitibikeStations from './views/citibike/stations'
 import CitibikeMetrics from './views/citibike/Metrics'
-import CitibikeTimelapse from './views/citibike/Timelapse'
+// import CitibikeTimelapse from './views/citibike/Timelapse'
 import TaxiDashboard from './views/taxi/Dashboard'
 import TaxiBla from './views/taxi/Bla'
 
@@ -28,10 +28,10 @@ function App(): JSX.Element {
                                 path="/dashboard/citibike/metrics"
                                 element={<CitibikeMetrics />}
                             />
-                            <Route
+                            {/* <Route
                                 path="/dashboard/citibike/timelapse"
                                 element={<CitibikeTimelapse />}
-                            />
+                            /> */}
                         </Route>
 
                         <Route

@@ -4,29 +4,10 @@ import sdk from '../utils/sdk'
 
 const router = express.Router()
 
-enum EmbedType {
-    Looks = 'looks',
-    Explore = 'explore',
-    Dashboards = 'dashboards',
-    DashboardsNext = 'dashboards-next',
-}
-
-// router.get('/query', async (req: Request, res: Response) => {
-//     try {
-//         const query = await sdk.ok(sdk.query(1736))
-//         res.json(query)
-//     } catch {
-//         res.status(404).send('Query not found.')
-//     }
-// })
-
 router.get('/signed-url-for-embed', async (req: Request, res: Response) => {
     const src = req.query.src as string
-    const components = src.substr(0, src.indexOf('?')).split('/')
-    const type = components[2]
-    const id = components[3]
     const params: IEmbedSsoParams = {
-        target_url: `https://sandbox.looker.rbobrowski.com/${type}/${id}?embed_domain=${process.env.LOCAL_API_URL}&sdk=2`,
+        target_url: `${process.env.LOOKERSDK_BASE_URL}${src}`, // https://dev.looker.rbobrowski.com/embed/dashboards-next/1?embed_domain=http%3A%2F%2Flocalhost%3A3000&sdk=2&theme=Minimal
         session_length: 3600,
         force_logout_login: true,
         external_user_id: 'embed1',
@@ -84,21 +65,10 @@ router.get('/signed-url-for-embed', async (req: Request, res: Response) => {
         // external_group_id: 'embed_group1',
         user_attributes: { locale: 'en_US' },
     }
+    console.log(params)
     const signedUrl = await sdk.ok(sdk.create_sso_embed_url(params))
 
     res.json(signedUrl)
 })
-
-// router.get('/token', async (req: Request, res: Response) => {
-//     try {
-//         const user = await sdk.ok(
-//             sdk.user_for_credential('email', 'rbobrowski@google.com')
-//         )
-//         const accessToken = await sdk.ok(sdk.login_user(user.id!))
-//         res.json(accessToken)
-//     } catch {
-//         res.status(404).send('User not found.')
-//     }
-// })
 
 export default router

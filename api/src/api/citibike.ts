@@ -1,6 +1,5 @@
 import { SDKResponse, IError } from '@looker/sdk-rtl'
 import { IValidationError } from '@looker/sdk'
-
 import sdk from '../utils/sdk'
 
 const getStations = (): Promise<
