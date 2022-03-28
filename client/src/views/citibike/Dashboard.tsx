@@ -8,19 +8,13 @@ function Dashboard(): JSX.Element {
                 <nav className="tabs">
                     <ul>
                         <li>
-                            <NavLink to="/dashboard/citibike/stations">
-                                Stations
-                            </NavLink>
+                            <NavLink to="/">Stations</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/citibike/metrics">
-                                Metrics
-                            </NavLink>
+                            <NavLink to="/metrics">Metrics</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/citibike/timelapse">
-                                Timelapse
-                            </NavLink>
+                            <NavLink to="/timelapse">Timelapse</NavLink>
                         </li>
                     </ul>
                 </nav>

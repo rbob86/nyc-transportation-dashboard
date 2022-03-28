@@ -1,11 +1,10 @@
 import './scss/main.scss'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Splash from './views/Splash'
 import DashboardWrapper from './views/DashboardWrapper'
 import CitibikeDashboard from './views/citibike/Dashboard'
 import CitibikeStations from './views/citibike/stations'
 import CitibikeMetrics from './views/citibike/Metrics'
-// import CitibikeTimelapse from './views/citibike/Timelapse'
+import CitibikeTimelapse from './views/citibike/Timelapse'
 import TaxiDashboard from './views/taxi/Dashboard'
 import TaxiBla from './views/taxi/Bla'
 
@@ -14,34 +13,21 @@ function App(): JSX.Element {
         <BrowserRouter>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<Splash />} />
-                    <Route path="/dashboard" element={<DashboardWrapper />}>
-                        <Route
-                            path="/dashboard/citibike"
-                            element={<CitibikeDashboard />}
-                        >
+                    <Route path="/" element={<DashboardWrapper />}>
+                        <Route path="/" element={<CitibikeDashboard />}>
+                            <Route path="/" element={<CitibikeStations />} />
                             <Route
-                                path="/dashboard/citibike/stations"
-                                element={<CitibikeStations />}
-                            />
-                            <Route
-                                path="/dashboard/citibike/metrics"
+                                path="/metrics"
                                 element={<CitibikeMetrics />}
                             />
-                            {/* <Route
-                                path="/dashboard/citibike/timelapse"
+                            <Route
+                                path="/timelapse"
                                 element={<CitibikeTimelapse />}
-                            /> */}
+                            />
                         </Route>
 
-                        <Route
-                            path="/dashboard/taxi"
-                            element={<TaxiDashboard />}
-                        >
-                            <Route
-                                path="/dashboard/taxi/bla"
-                                element={<TaxiBla />}
-                            />
+                        <Route path="/taxi" element={<TaxiDashboard />}>
+                            <Route path="/taxi/bla" element={<TaxiBla />} />
                         </Route>
                     </Route>
                 </Routes>

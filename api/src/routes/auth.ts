@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express'
 import { IEmbedSsoParams } from '@looker/sdk'
+import { DelimArray } from '@looker/sdk-rtl'
 import sdk from '../utils/sdk'
 
 const router = express.Router()
@@ -18,12 +19,12 @@ router.get('/signed-url-for-embed', async (req: Request, res: Response) => {
             // 'see_lookml_dashboards',
             // 'see_looks',
             'see_user_dashboards',
-            // 'explore',
+            'explore',
             // 'create_table_calculations',
             // 'save_content',
             // 'create_public_looks',
             // 'download_with_limit',
-            // 'download_without_limit',
+            'download_without_limit',
             // 'schedule_look_emails',
             // 'schedule_external_look_emails',
             // 'create_alerts',
@@ -39,7 +40,7 @@ router.get('/signed-url-for-embed', async (req: Request, res: Response) => {
             // 'support_access_toggle',
             // 'use_sql_runner',
             // 'clear_cache_refresh',
-            // 'see_drill_overlay',
+            'see_drill_overlay',
             // 'manage_spaces',
             // 'manage_homepage',
             // 'manage_models',
@@ -70,5 +71,31 @@ router.get('/signed-url-for-embed', async (req: Request, res: Response) => {
 
     res.json(signedUrl)
 })
+
+// export declare class DelimArray<T> extends Array<T> {
+//     separator: string;
+//     prefix: string;
+//     suffix: string;
+//     constructor(items?: Array<T>, separator?: string, prefix?: string, suffix?: string);
+//     static create<T>(): DelimArray<T>;
+//     toString: () => string;
+// }
+
+// router.get('/test', async (req: Request, res: Response) => {
+//     const response = await sdk.ok(
+//         sdk.run_inline_query({
+//             result_format: 'json',
+//             body: {
+//                 model: 'nyc_transportation',
+//                 view: 'citibike_trips',
+//                 fields: ['citibike_trips.start_station_name'],
+//                 filters: { 'citibike_trips.start_station_id': '>60' },
+//                 total: false,
+//             },
+//         })
+//     )
+
+//     res.json(response)
+// })
 
 export default router

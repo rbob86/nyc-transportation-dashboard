@@ -14,10 +14,7 @@ function DashboardWrapper(): JSX.Element {
                 <nav>
                     <ul>
                         <li>
-                            <NavLink
-                                to="/dashboard/citibike/stations"
-                                className="sidebar__nav-link"
-                            >
+                            <NavLink to="/" className="sidebar__nav-link">
                                 <span className="material-icons">
                                     directions_bike
                                 </span>
@@ -25,7 +22,7 @@ function DashboardWrapper(): JSX.Element {
                         </li>
                         <li>
                             <NavLink
-                                to="/dashboard/taxi/bla"
+                                to="/taxi/bla"
                                 className="sidebar__nav-link"
                             >
                                 <span className="material-icons">

@@ -23,6 +23,7 @@
         "@looker/sdk-node": "^21.20.0",
         "axios": "^0.24.0",
         "cors": "^2.8.5",
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "node-xlsx": "^0.21.0"
     }
 }

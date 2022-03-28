@@ -27,34 +27,3 @@
         }
     }
 }
-
-.spinner-container-splash {
-    width: 32px;
-    height: 32px;
-    margin: 0 auto;
-    position: relative;
-
-    .spinner {
-        animation: loading-bar-spinner 900ms linear infinite;
-
-        .spinner-icon {
-            width: 32px;
-            height: 32px;
-            border: solid 4px transparent;
-            border-top-color: #fff !important;
-            border-left-color: #fff !important;
-            border-radius: 50%;
-        }
-    }
-
-    @keyframes loading-bar-spinner {
-        0% {
-            transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-}

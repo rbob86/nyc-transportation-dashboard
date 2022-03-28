@@ -1,0 +1,26 @@
+{
+    "_method": "PUT",
+    "config": {
+        "enabled": true,
+        "idp_cert": "[FILTERED]",
+        "idp_url": "https://idpsso.dtcc.com/idp/startSSO.ping?PartnerSpId=https%3A%2F%2Fdtccrds.cloud.looker.com%2F",
+        "idp_issuer": "DTCCCORP",
+        "idp_audience": null,
+        "allowed_clock_drift": 0,
+        "user_attribute_map_email": "use.email",
+        "user_attribute_map_first_name": "user.firstName",
+        "user_attribute_map_last_name": "user.lastName",
+        "new_user_migration_types": "email",
+        "alternate_email_login_allowed": true,
+        "set_roles_from_groups": null,
+        "bypass_login_page": null,
+        "allow_normal_group_membership": true,
+        "allow_roles_from_normal_groups": true,
+        "allow_direct_roles": true,
+        "groups_with_role_ids": [],
+        "user_attributes_with_ids": [],
+        "default_new_user_role_ids": [],
+        "default_new_user_group_ids": []
+    },
+    "csrf-token": "[FILTERED]"
+}

@@ -1,0 +1,58 @@
+{
+    "_method": "PUT",
+    "config": {
+        "enabled": true,
+        "idp_cert": "[FILTERED]",
+        "idp_url": "https://idpssod.dtcc.com/idp/startSSO.ping?PartnerSpId=https%3A%2F%2Fdtccrdsdev.cloud.looker.com%2F",
+        "idp_issuer": "DTCCCORP",
+        "idp_audience": null,
+        "allowed_clock_drift": 0,
+        "user_attribute_map_email": "user.email",
+        "user_attribute_map_first_name": "user.firstName",
+        "user_attribute_map_last_name": "user.lastName",
+        "new_user_migration_types": "email",
+        "alternate_email_login_allowed": false,
+        "set_roles_from_groups": true,
+        "groups_attribute": "user.groups",
+        "auth_requires_role": false,
+        "groups_finder_type": "grouped_attribute_values",
+        "bypass_login_page": null,
+        "allow_normal_group_membership": true,
+        "allow_roles_from_normal_groups": true,
+        "allow_direct_roles": true,
+        "groups_with_role_ids": [
+            {
+                "id": 2,
+                "looker_group_name": "Looker_Administrators",
+                "name": "AP_PG-LOOKER-ADMINS",
+                "role_ids": [2]
+            },
+            {
+                "id": 6,
+                "looker_group_name": "Developer__LookMLModel",
+                "name": "AP_RW-DEV-LOOKER-RDS-role-DEVELOPER",
+                "role_ids": [4]
+            },
+            {
+                "id": 10,
+                "looker_group_name": "Viewer",
+                "name": "AP_RO-DEV-LOOKER-RDS-role-VIEWER",
+                "role_ids": [5]
+            },
+            {
+                "id": 11,
+                "looker_group_name": "Embedded Viewer",
+                "name": "AP_RO-DEV-LOOKER-RDS-role-EMBEDDED",
+                "role_ids": [9]
+            }
+        ],
+        "user_attributes_with_ids": [
+            {
+                "name": "SAML_SUBJECT",
+                "user_attribute_ids": [14],
+                "required": false
+            }
+        ]
+    },
+    "csrf-token": "[FILTERED]"
+}
